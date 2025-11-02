@@ -1,73 +1,122 @@
-# React + TypeScript + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+***
 
-Currently, two official plugins are available:
+# Expense Tracker Frontend
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+A modern web app to track your income and expense transactions with filtering, charts, and full CRUD.  
+Built with React, Redux Toolkit Query, shadcn/ui, TailwindCSS, and Zod.
 
-## React Compiler
+***
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Features
 
-## Expanding the ESLint configuration
+- Add, edit, delete transactions via modal dialog
+- Filter by type, category, and date range
+- Responsive pie & bar charts (Recharts)
+- Real-time validation with Zod + react-hook-form
+- Safe, fast API integration with Redux Toolkit Query
+- UI: TailwindCSS + shadcn and Lucide icons
+- **Prevents overdrafting:** Never allows you to record an expense greater than your available balance (no negative balance possible)
+- Works with a compatible backend (see below)
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+***
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Getting Started
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+### 1. **Clone the repository**
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+git clone <repo-url>
+cd assignment-frontend    
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. **Install dependencies**
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm install
 ```
+
+### 3. **Start the development server**
+
+```bash
+npm run dev
+```
+- Visit [http://localhost:5173](http://localhost:5173)
+
+### 4. **Build for Production**
+
+```bash
+npm run build
+```
+
+### 5. **Preview Production Build**
+
+```bash
+npm run preview
+```
+
+***
+
+## ⚡ Usage
+
+- Add transactions using the "Add Transaction" button.
+- Use filters to sort/search by type, category, and date.
+- Click the pencil icon in the table to edit, or trash icon to delete.
+- Charts update as you filter or modify data.
+
+***
+
+## 🌐 Backend API Setup
+
+- This frontend expects a backend running at `http://localhost:3000/api` (see `src/app/api/apiSlice.ts`).
+- The backend endpoints should match:
+  - `GET /api/transactions`
+  - `POST /api/transactions`
+  - `PUT /api/transactions/:id`
+  - `DELETE /api/transactions/:id`
+  - `GET /api/transactions/summary`
+- (Use the provided backend folder or supply your own compatible API.)
+
+***
+
+## 📦 Tech Stack
+
+- React 19 + TypeScript
+- Redux Toolkit & RTK Query
+- Tailwind CSS + shadcn/ui
+- react-hook-form + zod (form validation)
+- Recharts (charts)
+- Vite (build tool)
+
+***
+
+## 📝 Scripts
+
+- `npm run dev` – Start local dev server
+- `npm run build` – Build for production
+- `npm run preview` – Preview production build
+- `npm run lint` – Lint code with eslint
+
+***
+
+## 🏗️ Folder Structure
+
+```
+src/
+  app/
+    api/
+      apiSlice.ts
+    store.ts
+  features/
+    transactions/
+      TransactionForm.tsx
+      TransactionList.tsx
+      TransactionFilters.tsx
+  components/
+    ui/
+      (shadcn components)
+  types/
+    transaction.ts
+```
+
+***
